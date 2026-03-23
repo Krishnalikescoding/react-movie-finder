@@ -2,14 +2,21 @@ import "../css/MovieCard.css";
 import { useMovieContext } from "../contexts/MovieContext";
 
 function MovieCard({ movie }) {
-  const { isFavourite, addToFavourites, removeFromFavourites } =
+  const { isFavourite, addToFavourites, removeFromFavourites, isInWatchlist, addToWatchlist,removeFromWatchlist, } =
     useMovieContext();
   const favourite = isFavourite(movie.id);
+  const watchlisted = isInWatchlist(movie.id);
   
   function onFavouriteClick(e) {
     e.preventDefault();
     if (favourite) removeFromFavourites(movie.id);
     else addToFavourites(movie);
+  }
+
+  function onWatchlistClick(e) {
+    e.preventDefault();
+    if (watchlisted) removeFromWatchlist(movie.id);
+    else addToWatchlist(movie);
   }
 
   return (
@@ -25,6 +32,12 @@ function MovieCard({ movie }) {
             onClick={onFavouriteClick}
           >
             ❤︎
+          </button>
+          <button
+            className={`watchlist-btn ${watchlisted ? "active" : ""}`}
+            onClick={onWatchlistClick}
+          >
+            ⛊
           </button>
         </div>
       </div>

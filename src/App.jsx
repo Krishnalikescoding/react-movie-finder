@@ -5,8 +5,9 @@ import heroImg from "./assets/hero.png";
 import "./css/App.css";
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
-import { Routes, Route } from "react-router-dom";
+import Watchlist from "./pages/Watchlist";
 import NavBar from "./components/NavBar";
+import { Routes, Route } from "react-router-dom";
 import { MoviesProvider } from "./contexts/MovieContext";
   
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Favourites" element={<Favourites />} />
+            <Route path="/Watchlist" element={<Watchlist />} />
           </Routes>
         </main>
       </div>

@@ -24,7 +24,7 @@ function Home() {
     loadPopularMovies();
   }, []);
 
-  const handleSearch = async (e) => { 
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
     if (loading) return;
@@ -40,22 +40,48 @@ function Home() {
     } finally {
       setLoading(false);
     }
+  };
 
+  const handleClearSearch = async () => {
+    setLoading(true);
+    setSearchQuery("");
+    try {
+      const popularMovies = await getPopularMovies();
+      setMovies(popularMovies);
+      setError(null);
+    } catch (err) {
+      setError("Failed to load movies...");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="home">
       <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search for the movies..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
+        <div className="ent-search-box">
+          <div className="search-input-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search for the movies..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className="search-clear-btn"
+                onClick={handleClearSearch}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+          <button type="submit" className="search-button">
+            Search
+          </button>
+        </div>
       </form>
 
       {error && <div className="error-message">{error}</div>}
