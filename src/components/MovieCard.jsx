@@ -13,13 +13,13 @@ function MovieCard({ movie, type }) {
   function onFavouriteClick(e) {
     e.preventDefault();
     if (favourite) removeFromFavourites(movie.id);
-    else addToFavourites(movie);
+    else addToFavourites(movie, type);
   }
 
   function onWatchlistClick(e) {
     e.preventDefault();
     if (watchlisted) removeFromWatchlist(movie.id);
-    else addToWatchlist(movie);
+    else addToWatchlist(movie, type);
   }
 
   return (

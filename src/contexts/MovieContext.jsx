@@ -36,9 +36,9 @@ export const MoviesProvider = ({ children }) => {
     localStorage.setItem("watchlist", JSON.stringify(watchlist));
   }, [watchlist]);
 
-  const addToFavourites = (movie) => {
+  const addToFavourites = (movie, type) => {
     removeFromWatchlist(movie.id);
-    setFavourites((prev) => [...prev, movie]);
+    setFavourites((prev) => [...prev, {...movie, type}]);
   };
 
   const removeFromFavourites = (movieId) => {
@@ -49,9 +49,9 @@ export const MoviesProvider = ({ children }) => {
     return favourites.some((movie) => movie.id === movieId);
   };
 
-  const addToWatchlist = (movie) => {
+  const addToWatchlist = (movie, type) => {
     removeFromFavourites(movie.id);
-    setWatchlist((prev) => [...prev, movie]);
+    setWatchlist((prev) => [...prev, {...movie, type}]);
   };
 
   const removeFromWatchlist = (movieId) => {
