@@ -1,12 +1,15 @@
 import "../css/MovieCard.css";
 import { useMovieContext } from "../contexts/MovieContext";
 
-function MovieCard({ movie }) {
-  const { isFavourite, addToFavourites, removeFromFavourites, isInWatchlist, addToWatchlist,removeFromWatchlist, } =
+function MovieCard({ movie, type }) {
+  const { isFavourite, addToFavourites, removeFromFavourites, isInWatchlist, addToWatchlist, removeFromWatchlist, } =
     useMovieContext();
   const favourite = isFavourite(movie.id);
   const watchlisted = isInWatchlist(movie.id);
-  
+
+  const title = type === "movies" ? movie.title : movie.name;
+  const year = type === "movies"? movie.release_date?.split("-")[0] : movie.first_air_date?.split("-")[0];
+
   function onFavouriteClick(e) {
     e.preventDefault();
     if (favourite) removeFromFavourites(movie.id);
@@ -43,8 +46,8 @@ function MovieCard({ movie }) {
       </div>
 
       <div className="movie-info">
-        <h3>{movie.title}</h3>
-        <p>{movie.release_date?.split("-")[0]}</p>
+        <h3>{title}</h3>
+        <p>{year}</p>
       </div>
     </div>
   );

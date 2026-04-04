@@ -10,6 +10,7 @@ export const getPopularMovies = async () => {
 export const getPopularTVShows = async () => {
   const response = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}`);
   const data = await response.json();
+  console.log(data);
   return data.results;
 };
 
@@ -18,7 +19,9 @@ export const getPopularAnime = async () => {
     `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_genres=16&with_origin_country=JP&sort_by=popularity.desc`
   );
   const data = await response.json();
+  console.log(data)
   return data.results;
+  
 };
 
 export const searchMovies = async (query) => {

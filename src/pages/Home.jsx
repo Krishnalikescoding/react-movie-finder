@@ -17,9 +17,10 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("movies");
   useEffect(() => {
-    const loadContent = async () => {
+     const loadContent = async () => {
       setLoading(true);
       try {
+
         let results;
         if (activeTab === "movies") results = await getPopularMovies();
         else if (activeTab === "tvseries") results = await getPopularTVShows();
@@ -34,7 +35,7 @@ function Home() {
       }
     };
     loadContent();
-  }, [activeTab]); // NEW — reruns whenever tab changes
+  }, [activeTab]); 
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -101,7 +102,7 @@ function Home() {
         </button>
       </form>
 
-      {}
+      { }
       <div className="tabs">
         <button
           className={`tab-btn ${activeTab === "movies" ? "active" : ""}`}
@@ -119,7 +120,7 @@ function Home() {
             setSearchQuery("");
           }}
         >
-          Web Series
+          TV Shows
         </button>
         <button
           className={`tab-btn ${activeTab === "anime" ? "active" : ""}`}
